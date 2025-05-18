@@ -5,6 +5,10 @@ from openai_handler import create_thread
 
 app = Flask(__name__)
 
+@app.route('/',methods=['GET'])
+def index():
+    return jsonify({'message':'API running successfully'}), 200
+
 @app.route('/input', methods=['POST'])
 def receive_json():
     data = request.get_json()
