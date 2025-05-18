@@ -18,8 +18,11 @@ def get_entry(phone_id):
     return result if result else None
 
 # ✅ 3. Delete entry by phoneId (if needed)
-def delete_entry(phone_id):
-    db.remove(Phone.phoneId == phone_id)
+def delete_entry(phone_id=None, delete_all=False):
+    if delete_all:
+        db.truncate()  # Clears all entries in the database
+    elif phone_id is not None:
+        db.remove(Phone.phoneId == phone_id)
 
 if __name__ == "__main__":
     # Example usage
