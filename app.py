@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from db_handler import upsert_entry, get_entry
+from db_handler import upsert_entry, get_entry, delete_entry
 from message_handler import send_message, send_session_message
 from openai_handler import create_thread
 
@@ -8,6 +8,12 @@ app = Flask(__name__)
 @app.route('/',methods=['GET'])
 def index():
     return jsonify({'message':'API running successfully'}), 200
+
+@app.route('/delete',methods=['GET','POST'])
+def delete_all():
+    delete_entry(delete_all=True)
+    return jsonify({'message':'All records deleted'})
+    
 
 @app.route('/input', methods=['POST'])
 def receive_json():
