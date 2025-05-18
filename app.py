@@ -13,6 +13,11 @@ def index():
 def delete_all():
     delete_entry(delete_all=True)
     return jsonify({'message':'All records deleted'})
+
+@app.route('/records',methods=['GET','POST'])
+def records():
+    return jsonify(get_entry(get_all = True))
+
     
 
 @app.route('/input', methods=['POST'])

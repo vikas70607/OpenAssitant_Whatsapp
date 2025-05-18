@@ -13,9 +13,13 @@ def upsert_entry(phone_id, name, thread_id):
         db.insert({'phoneId': phone_id, 'name': name, 'threadId': thread_id})
 
 # ✅ 2. Get entry by phoneId
-def get_entry(phone_id):
-    result = db.search(Phone.phoneId == phone_id)
-    return result if result else None
+def get_entry(phone_id=None, get_all=False):
+    if get_all:
+        return db.all()  # Return all records as JSON string
+    elif phone_id is not None:
+        result = db.search(Phone.phoneId == phone_id)
+        return json.dumps(result) if result else None  # Return as JSON string
+    return None
 
 # ✅ 3. Delete entry by phoneId (if needed)
 def delete_entry(phone_id=None, delete_all=False):
