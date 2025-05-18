@@ -18,7 +18,7 @@ def get_entry(phone_id=None, get_all=False):
         return db.all()  # Return all records as JSON string
     elif phone_id is not None:
         result = db.search(Phone.phoneId == phone_id)
-        return json.dumps(result) if result else None  # Return as JSON string
+        return result if result else None  # Return as JSON string
     return None
 
 # ✅ 3. Delete entry by phoneId (if needed)
